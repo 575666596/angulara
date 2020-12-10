@@ -1,0 +1,64 @@
+<!-- 条件渲染的另一种写法 -->
+<sapn *ngIf="flag else hidden">显示</sapn>
+<ng-template #hidden>隐藏</ng-template>
+<button (click)="toggle()">切换</button>
+<button (click)="flag=!flag">切换</button>
+
+<!-- 循环当前项添加类名 -->
+<ul>
+    <li *ngFor="let item of list; let i = index;" [ngClass]="{'red': i==currentIndex}" (click)="currentIndex=i">{{item}}
+    </li>
+</ul>
+
+<!-- 手动实现双向数据绑定和angular双向数据绑定 -->
+<p>{{msg}}</p>
+<input type="text" [value]='msg' (input)='msg=$event.target.value'>
+<input type="text" [(ngModel)]="msg">
+
+<!-- 按钮禁用属性 -->
+<button [disabled]='!flag' (click)="ban()">停用3秒</button>
+<button disabled>停用3秒</button>
+
+<!-- 标签引用 -->
+<input type="text" #input>
+<button (click)="input.value=''">清空</button>
+
+<!-- 管道，也叫过滤器 -->
+<!-- 时间管道 -->
+<p>原始时间：{{time}}</p>
+<p>管道时间：{{time | date: 'yyyy-MM-dd HH-mm-ss'}}</p>
+<!-- json对象管道 -->
+<p>{{obj}}</p>
+<p>{{obj | json}}</p>
+<!-- 数字管道 number: '整数位数.小数最小位-小数最大位'-->
+<p>{{num}}</p>
+<p>{{num | number: '1.2-2'}}</p>
+<!-- 截取管道 -->
+<p>{{str}}</p>
+<p>{{str | slice: 2:4}}</p>
+<p>{{str | slice: 1:str.length}}</p>
+<div *ngFor="let item of list | slice: 0:3">{{item}}</div>
+
+<!-- ng-content插槽使用 -->
+
+<app-base-child>
+    <p>默认匹配所有插槽</p>
+    <div>匹配标签</div>
+    <p class="selector">匹配选择器</p>
+    <p title="p">匹配属性=属性值</p>
+</app-base-child>
+
+<p>父组件使用服务数据：{{ myseriveService.seriveData }}</p>
+<button (click)="change()">修改服务数据会影响都其他组件</button>
+
+<!-- ng-container不会生成元素标签，也不会影响页面样式和布局 -->
+
+<ul>
+    <ng-container *ngFor="let item of list;let i=index">
+        <li *ngIf="i%2 === 0">
+            {{i}}---{{item}}
+        </li>
+    </ng-container>
+</ul>
+
+<a [routerLink]="[ '/basechild' ]">跳转到子路由</a>

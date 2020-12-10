@@ -1,7 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { BaseComponent } from './components/base/base.component';
+
+import { BaseChildComponent } from './components/base-child/base-child.component'
+
+const routes: Routes = [
+  {
+    path: 'base', component: BaseComponent
+  }, {
+    path: 'basechild', component: BaseChildComponent
+  }, {
+    path: '', redirectTo: 'base', pathMatch: 'full'
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

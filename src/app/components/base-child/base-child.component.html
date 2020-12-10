@@ -1,0 +1,8 @@
+<p>base-child works!</p>
+<ng-content></ng-content>
+<ng-content select="div"></ng-content>
+<ng-content select=".selector"></ng-content>
+<ng-content select="[title=p]"></ng-content>
+<hr>
+<p>子组件使用服务数据： {{ myseriveService.seriveData }}</p>
+<button (click)="goback()">回退</button>
