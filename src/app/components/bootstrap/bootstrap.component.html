@@ -1,0 +1,38 @@
+<!-- Angular中第三方插件使用，以bootstrap为例 -->
+<div class="alert alert-primary" role="alert">
+    A simple primary alert—check it out!
+</div>
+<!-- CDN方式
+    1.index.html中以link方式引入css和js文件 -->
+
+<!-- 2.angular.json文件全局配置 -->
+打开angular.json文件，找到 'build'字段，然后找到'styles'字段，可以看到
+"styles": [
+"src/styles.scss"
+]
+然后尝试把路径添加到里面
+"styles": [https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css,
+"src/styles.scss"
+]
+会报错，angular.json配置文件只可以使用本地文件，而link标签会请求远程CSS文件。
+解决方法，打开远程地址，复制CSS代码，然后在本地assets目录中新建一个mystyle.css文件，也可以是scss文件，都是兼容的，然后把代码复制到文件里面，这样bootstrap的CSS样式文件就成了我们本地文件。最后在angular.json文件中引入我们本地mystyle.css文件
+
+"styles": ["src/assets/css/mystyle.css",
+"src/styles.scss"
+]
+
+注意，只要修改了配置文件都要重启项目
+
+同理，可以把三个js文件下载到本地，然后在"script": []字段中引入本地文件
+
+但是不建议这么做，样式文件可以通过import的方式在全局样式文件styles.scss文件中导入
+@import './assets/css/mystyle.css'
+
+实测：引入样式文件后，会影响到其他页面元素，比如根组件的p标签字体从微软雅黑变成了其他字体，大小没有发生变化，还是16px，外边距也发生了变化
+
+2.npm或yarn方式
+注意 有的安装 显示 npm i xxx -S --save
+这两个选项是不用写的，默认就是
+
+安装
+npm i bootstrap

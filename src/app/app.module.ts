@@ -7,13 +7,15 @@ import { BaseComponent } from './components/base/base.component';
 import { FormsModule } from '@angular/forms';
 import { BaseChildComponent } from './components/base-child/base-child.component'
 
-import { MyseriveService } from './services/myserive.service'
+import { MyseriveService } from './services/myserive.service';
+import { BootstrapComponent } from './components/bootstrap/bootstrap.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
-    BaseChildComponent
+    BaseChildComponent,
+    BootstrapComponent
   ],
   imports: [
     BrowserModule,

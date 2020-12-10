@@ -11,7 +11,7 @@ const routes: Routes = [
   }, {
     path: 'basechild', component: BaseChildComponent
   }, {
-    path: '', redirectTo: 'base', pathMatch: 'full'
+    path: '', redirectTo: '', pathMatch: 'full'
   }
 ];
 
