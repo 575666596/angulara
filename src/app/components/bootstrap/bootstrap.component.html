@@ -1,12 +1,12 @@
 <!-- Angular中第三方插件使用，以bootstrap为例 -->
-<div class="alert alert-primary" role="alert">
+<div class="alert alert-danger" role="alert">
     A simple primary alert—check it out!
 </div>
 <!-- CDN方式
     1.index.html中以link方式引入css和js文件 -->
 
 <!-- 2.angular.json文件全局配置 -->
-打开angular.json文件，找到 'build'字段，然后找到'styles'字段，可以看到
+<!-- 打开angular.json文件，找到 'build'字段，然后找到'styles'字段，可以看到
 "styles": [
 "src/styles.scss"
 ]
@@ -34,5 +34,30 @@
 注意 有的安装 显示 npm i xxx -S --save
 这两个选项是不用写的，默认就是
 
-安装
-npm i bootstrap
+1.安装
+npm i bootstrap·
+
+2. style.scss文件引入文件，出css效果
+@import '~bootstrap'
+
+3.还是要放开index.html的三个js文件，否则js效果出不来
+
+4.也可以在main.ts入口文件中引入bootstrap，因为bootstrap依赖jQuery和Popper，所以先下载这两个依赖
+npm i jquery popper.js
+
+只需要引入bootstrap，bootstrap内部会引用jQuery和Popper 
+
+注意两种引入方式只需要一种，都使用反而不生效-->
+
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+</div>
