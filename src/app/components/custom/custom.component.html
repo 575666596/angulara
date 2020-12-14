@@ -1,0 +1,15 @@
+<p>custom works!</p>
+<!-- 创建一个自定义指令
+ng g d directives/highlight --skipTests
+指令也像组件一样默认挂载到根模块 -->
+
+<p appHighlight [highlightColor]='color'>传递blue</p>
+
+<!-- 组件中使用，没有出效果，原因不明 -->
+<!-- <app-tel appHighlight highlightColor='green'></app-tel> -->
+
+<!-- 传静态值 -->
+<p appHighlight highlightColor='black'>传递black</p>
+
+<!-- 给传入值一个别名，这个别名跟指令名称相同，就可以巧妙简写-->
+<p [appHighlight]='color'>自定义指令别名</p>

@@ -1,0 +1,70 @@
+<p>forward works!</p>
+<!-- 结构型指令，*号开头，用于html布局的，可以改变dom结构
+指令是内置在浏览器模块(BrowserModule)中的，把根模块的引入注释之后页面就不能正常使用指令了 -->
+
+<!-- 语法糖写法 -->
+<p *ngIf='true'>1:{{flag}}</p>
+
+<p *ngIf='flag else tel'>2:{{flag}}</p>
+<ng-template #tel>3:{{flag}}</ng-template>
+
+<ng-template [ngIf]='flag'>4:{{flag}}</ng-template>
+
+<!-- 无效写法，123无法显示，但不报错 -->
+<!-- <ng-template *ngIf='true'>123</ng-template> -->
+<button (click)='flag=!flag' class="btn btn-outline-primary">切换</button>
+
+
+<!-- ngFor的局部变量 -->
+
+<div *ngFor='let item of list;index as i;count as len trackBy: trackByFn'>
+    {{i}}---{{item.name}}---{{len}}
+</div>
+
+<div *ngFor='let item of list;let i = index'>{{i}}---{{item.name}}</div>
+
+<button (click)="changeList()" class="btn btn-outline-secondary">操作数组，观察dom结构变化</button>
+
+<!-- 使用trackBy提高性能
+trackBy: trackByFn 定义如何跟踪iterable中项的更改的函数。
+在iterable中添加、移动或移除项时，指令必须重新呈现适当的DOM节点。为了最小化DOM中的搅动，只重新呈现已更改的节点。
+
+默认情况下，更改检测器假定对象实例标识iterable中的节点。提供此函数时，指令使用调用此函数的结果来标识项节点，而不是对象本身的标识。
+
+函数接收两个输入，迭代索引和节点对象ID。
+要想自定义默认的跟踪算法，NgForOf 支持 trackBy 选项。 trackBy 接受一个带两个参数（index 和 item）的函数。
+如果给出了 trackBy，Angular 就会使用该函数的返回值来跟踪变化。 -->
+
+
+<!-- 模板引用变量
+模板引用变量通常是对模板中DOM元素的引用。它还可以引用指令（包含组件）、元素、TemplateRef或Web Component
+使用井号（#）声明模板引用变量。以下模板引用变量#phone会在<input>元素上声明了一个phone变量。 
+用在元素上就是获取元素，用在组件上就是获取组件实例 -->
+<!-- 在ts文件中通过ViewChild获取dom和子组件 -->
+
+<input type="text" #phone placeholder="phone number">
+<!-- ref- 等同于 # -->
+<!-- <input type="text" ref-phone placeholder="phone number"> -->
+
+<!-- #号就相当于getElementByid获取dom元素了 -->
+<button (click)="callPhone(phone.value)" class="btn btn-primary">call</button>
+
+<!-- 页面引用组件 -->
+<app-tel #mytel></app-tel>
+<button (click)='mytel.get()'>调用子组件方法</button>
+
+<!-- 安全导航运算符（？）
+es2020中的新语法，又叫可选链
+应用场景:服务器返回的数据是有延迟的，页面渲染的时候可能数据还没有请求成功 -->
+
+<!-- 写的时候没问题，运行的时候报错
+<p>hero name:{{hero.name}}</p>  -->
+
+<!-- 下面的方法都可以在数据请求成功时再加载数据，如果没有数据就不显示 -->
+<!-- 解决方法1 -->
+<p *ngIf='hero'>hero name:{{hero.name}}</p>
+<!-- 解决方法2。访问hero下面的name属性，就算是没有（undefined）也不要报错 -->
+<p>hero name:{{hero?.name}}</p>
+
+<!-- Angular 安全导航运算符？可以对在属性路径中出现nul1和undefined值进行保护。如果访问的值为nul1或undefined，它可以防止视图渲染失败。视图仍然染，只是显示的值为空白
+允许a?.b?.c?.d减少一堆判断条件  -->

@@ -1,0 +1,92 @@
+<!-- 插值表达式强化 -->
+
+<!-- 1.调用函数 -->
+<p>{{getVal()}}</p>
+
+<!-- 2.es6变量 -->
+<p>{{job}}</p>
+
+<!-- 3.逻辑运算+-*/ -->
+<p>{{price*0.7}}</p>
+
+<!-- 4.三元表达式 -->
+<p>{{gender===0?'男':'女'}}</p>
+
+<!-- 模板用于显示数据，不能赋值 
+<p>{{price=100}}</p>-->
+
+
+
+<!-- 属性绑定 -->
+
+<!-- 1.默认属性，绑定到 Property。-->
+
+<!-- 一般直接用[]  -->
+<img [src]="imgurl" [alt]="name">
+<img bind-src="imgurl" bind-alt="name">
+<br>
+<!-- 特殊用驼峰式 -->
+<tr>
+	<td [colSpan]="2">Three</td>
+</tr>
+
+<!-- 2.自定义属性，绑定到 Attribute -->
+
+<!-- Attribute 绑定语法类似于 Property 绑定，但不是直接在方括号之间放置元素的 Property，而是在 Attribute 名称前面加上前缀 attr，后跟一个点 .。然后，使用解析为字符串的表达式设置 Attribute 值。 -->
+<tr>
+	<td [attr.colspan]="2">One</td>
+</tr>
+
+
+
+<!-- 样式绑定 -->
+
+<!-- 1.绑定到 class Attribute -->
+
+<!-- 单一类 -->
+<div [class.red]="true">class.red</div>
+
+<!-- 多类 -->
+<div [class]='{red:true,font:flag?true:""}'>class对象语法</div>
+<div [ngClass]='{red:true,font:flag?true:""}'>ngClass对象语法</div>
+
+<div [class]="['red',flag?'font':'']">class数组语法</div>
+<div [ngClass]="['red',flag?'font':'']">ngClass数组语法</div>
+
+<!-- 2.绑定到 style Attribute -->
+
+
+<!-- 阻止事件冒泡 -->
+<div (click)="parent()" id="parent">
+	<p (click)="child($event)" id="child">1</p>
+	<p (click)="$event.stopPropagation()" id="child">2</p>
+</div>
+
+<!-- 表单类型断言 -->
+<input type="text" (click)='onInput($event)'>
+
+<br>
+<!-- 父子传值 -->
+<button (click)='toggle()'>切换</button>
+<p>{{ppflag}}</p>
+
+<!-- 提供别名
+@lnput（）和 @Output（）可以接收一个参数，作为变量的别名，那么父组件中只能用别名绑定
+一般不会这么用，容易混乱，但是在自定义指令中使用可以简化代码 -->
+<p>{{fixed}}</p>
+
+
+<!-- 双向数据绑定 下面的写法报错 -->
+<!-- <input type="text" [value]='val' (input)="val=$event.target.value"> -->
+
+<!-- 这种不报错但是不能实现功能-->
+<input type="text" [ngModel]='ngval' (ngModuleChange)="ngval=$event.target">
+<p>没有实现功能:{{ngval}}</p>
+
+<!-- 表单form中使用ngModulel的两种方式 -->
+<!-- 1.添加name属性 -->
+<form>
+	<input type="text" [(ngModel)]='formVal' name='myinput'>
+	<!-- 方法二 -->
+	<input type="text" [(ngModel)]='formVal' [ngModelOptions]="{standalone:true}">
+</form>

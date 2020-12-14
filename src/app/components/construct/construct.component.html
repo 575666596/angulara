@@ -1,0 +1,11 @@
+<p>construct works!</p>
+<!-- TemplateRef 和ViewContainerRef
+像这个例子一样的简单结构型指令会从Angular生成的<ngtemplate>元素中创建一个内嵌的视图，并把这个视图插入到一个视图容器中，紧挨着本指令原来的宿主元素<p>（译注：注意不是子节点，而是兄弟节点）。你可以使用TemplateRef取得<ng-template>的内容，并通过ViewcontainerRef来访问这个视图容器。 -->
+<ng-container>
+    <ng-template>
+        <p>content</p>
+    </ng-template>
+</ng-container>
+
+<p *appStructure="!condition">结构型指令</p>
+<div *appStructure>123</div>

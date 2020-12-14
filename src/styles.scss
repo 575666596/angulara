@@ -2,4 +2,8 @@
 // @import './assets/css/mystyle.css'
 
 // npm下载之后引入样式文件，可以单击查看文件的目录
-@import '~bootstrap'
+@import '~bootstrap';
+
+body {
+  padding-left: 20px;
+}
